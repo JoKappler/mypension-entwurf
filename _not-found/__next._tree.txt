@@ -1,5 +1,5 @@
-:HL["/mypension-entwurf/_next/static/chunks/24_y1s4-mfc-7.css","style"]
+:HL["/mypension-entwurf/_next/static/chunks/1dgd5c47s9mys.css","style"]
 :HL["/mypension-entwurf/bilder/logo-dark.svg","image"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":64,"c":"$Q2"}]]
-0:{"b":"lvdbN7CPOyWDovHbFxx1H","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
+0:{"b":"VK21ClrUmoTfMP2-iZD_b","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
