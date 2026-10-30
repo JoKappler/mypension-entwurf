@@ -1,6 +1,6 @@
-:HL["/mypension-entwurf/_next/static/chunks/1c0sq7waulbi-.css","style"]
+:HL["/mypension-entwurf/_next/static/chunks/32mj9mkc5wm6d.css","style"]
 :HL["/mypension-entwurf/bilder/logo-dark.svg","image"]
 :HL["/mypension-entwurf/bilder/johanna-pitsch-gesicht.jpg","image"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":64,"c":"$Q2"}]]
-0:{"b":"zcTEkL4-Y-aC96EgRNZPh","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
+0:{"b":"5fzWWw3RucOu_ImBpHNN6","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
