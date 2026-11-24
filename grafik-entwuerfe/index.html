@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Netto-Vergleich: drei Vorschläge für die Grafik</title>
+<style>
+:root{
+  /* Werte aus der Live-Seite (computed styles, 24.11.2026) */
+  --navy-900:#16243A; --navy-850:#1B2C46; --navy-800:#223651; --navy-700:#2B4266; --navy-500:#4A6690;
+  --gold:#EDCF7F; --text-2:#C3CEDE; --text-3:#93A7C6; --creme:#F7F3EC;
+  /* drei Bedeutungen, drei Töne; geprüft gegen #16243A: Farbfehlsicht ΔE 14,1, Normalsicht ΔE 21,0, Kontrast >= 3:1 */
+  --eigen:#4672BA; --staat:#3FC4CC; --staat-2:#2A98A0; --wachs:#EDCF7F;
+  --schrift:"Schibsted Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;font-family:var(--schrift);font-size:18px;line-height:1.6;color:var(--navy-900);background:var(--creme)}
+h1,h2,h3,p,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:inherit}
+.rahmen{max-width:1152px;margin:0 auto;padding:0 24px}
+@media (max-width:639px){.rahmen{padding:0 16px}}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:4px}
+
+/* ---------- Entwurfsseite (hell) ---------- */
+.kopf{padding:36px 0 28px}
+.kopf h1{font-size:2rem;line-height:1.15;letter-spacing:-.02em}
+.kopf p{margin-top:8px;color:#33425A;font-size:1rem;max-width:70ch}
+.kopf .bitte{margin-top:4px;color:var(--navy-900);font-weight:600}
+.sprung{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.sprung a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:2px solid var(--navy-900);border-radius:999px;text-decoration:none;font-weight:600;font-size:15.2px}
+.sprung a:hover{background:var(--navy-900);color:#fff}
+.v-titel{padding-top:28px;padding-bottom:14px}
+.v-titel h2{font-size:1.4rem;letter-spacing:-.01em}
+.v-titel h2 span{color:#6B5A2A}
+.v-notiz{padding-top:12px;padding-bottom:8px;font-size:15.2px;color:#5A6478}
+.urteil{padding:36px 0 56px}
+.urteil h2{font-size:1.4rem}
+.urteil p{margin-top:8px;max-width:72ch;font-size:1rem;color:#2B3A52}
+
+/* ---------- Nachbau der Seite (dunkel) ---------- */
+.seite{background:var(--navy-900);color:#fff;padding:40px 0 56px}
+.modus{display:flex;gap:8px}
+.pill{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 16px;border:2px solid var(--navy-500);border-radius:999px;font-size:18px;font-weight:600;line-height:1;white-space:nowrap;color:#fff}
+.pill.an{background:var(--gold);border-color:var(--gold);color:var(--navy-900)}
+.rechner{display:grid;grid-template-columns:440px minmax(0,1fr);column-gap:48px;margin-top:20px;align-items:start}
+@media (max-width:1023px){.rechner{grid-template-columns:minmax(0,1fr);row-gap:32px}}
+.form{font-size:15.2px;line-height:20.9px;color:var(--text-2)}
+.form .klein{font-size:14px;line-height:19.25px}
+.form .hinweis{font-size:14px;line-height:19.25px;color:var(--text-3)}
+.form .link{color:var(--gold);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.form .gruppe{margin-top:16px}
+.form label,.form .lg{display:block;margin-bottom:4px}
+.felder{display:grid;grid-template-columns:repeat(3,136px);gap:16px;margin-top:16px}
+@media (max-width:639px){.felder{grid-template-columns:1fr 1fr}}
+.feld{height:48px;border:2px solid var(--navy-500);border-radius:8px;background:var(--navy-800);display:flex;align-items:center;justify-content:flex-end;padding:0 12px;color:#fff}
+.feld b{font-size:18px;font-weight:600}
+.feld i{font-style:normal;font-size:15.2px;color:var(--text-2);margin-left:16px}
+.feld i.eur{margin-left:14px}
+.feld.b256{width:256px}
+.form .unter{margin-top:8px}
+.pillen{display:flex;gap:8px}
+.stepper{display:flex;align-items:center;gap:12px}
+.rund44{width:44px;height:44px;border:2px solid var(--navy-500);border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff}
+.stepper output{font-size:20px;font-weight:600;color:#fff;min-width:24px;text-align:center}
+.mehr-einst{display:inline-flex;align-items:center;height:44px;color:var(--gold);font-size:18px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- Ergebnis: gemeinsame Bausteine ---------- */
+.ergebnis{container-type:inline-size;min-width:0}
+.e-kopf{font-size:14.4px;line-height:1.4;color:var(--text-2)}
+.leg{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:6px;font-size:14px;line-height:1.4;color:var(--text-2)}
+.leg li{display:flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;flex:none}
+.sw-eigen,.s-eigen{background:var(--eigen)}
+.sw-staat,.s-staat{background:repeating-linear-gradient(135deg,var(--staat) 0 3px,var(--staat-2) 3px 5px)}
+.sw-wachs,.s-wachs{background:var(--wachs)}
+.name{font-size:18px;font-weight:600;line-height:24px;overflow-wrap:anywhere;hyphens:manual}
+.zahl{font-size:24px;font-weight:700;line-height:30px;white-space:nowrap;text-align:right}
+@container (max-width:560px){.name{font-size:17px;line-height:22px}.zahl{font-size:20px;line-height:26px}}
+/* Einzelheiten-Schalter und ruhiger Aktionslink */
+.einz{display:inline-flex;align-items:center;gap:6px;min-height:36px;font-size:15.2px;font-weight:600;color:#fff;cursor:pointer}
+.einz > span{text-decoration:underline;text-underline-offset:3px}
+.einz::after{content:"▾";font-size:12px;font-weight:400;transition:transform .15s}
+.einz[aria-expanded="true"]::after{transform:rotate(180deg)}
+.aktion{display:inline-flex;align-items:center;min-height:36px;font-size:15.2px;font-weight:600;color:var(--gold);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.knopf{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border:2px solid var(--gold);border-radius:999px;color:var(--gold);font-size:15.2px;font-weight:600;text-decoration:none;white-space:nowrap}
+.knopf:hover{background:var(--gold);color:var(--navy-900)}
+.einz[aria-expanded="true"] ~ .aktion{visibility:hidden}
+.det{padding:4px 0 6px;font-size:15.2px;line-height:20.9px;color:var(--text-2);display:grid;gap:6px;justify-items:start}
+.det[hidden]{display:none}
+.det .d3{font-size:14.4px}
+.det .weiss{color:#fff;font-weight:600}
+.det .wie{color:var(--text-3);font-size:14px}
+.det .knopf{margin-top:6px}
+.teile{display:grid;gap:4px}
+.teile li{display:grid;grid-template-columns:12px minmax(0,1fr);gap:8px;align-items:start}
+.teile .sw{margin-top:4px}
+.teile b{color:#fff;font-weight:600;white-space:nowrap}
+/* Balken mit Teilen beim Berühren */
+.bk{position:relative;padding:6px 0;outline:none}
+.bk-b{display:flex;height:10px;border-radius:0 5px 5px 0;overflow:hidden}
+.bk-b > div{height:100%;flex:none}
+.bk-b > .s-staat{min-width:18px}
+.bk-b > .s-wachs{flex:1 1 0;min-width:0}
+.bk-b > div + div{box-shadow:inset 2px 0 0 var(--navy-900)}
+.tip{display:none;position:absolute;left:0;top:calc(100% - 2px);z-index:5;padding:8px 12px;border:1px solid var(--navy-500);border-radius:10px;background:var(--navy-800);font-size:14px;line-height:1.5;color:var(--text-2);white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.tip b{color:#fff;font-weight:600}
+.tip li{display:flex;align-items:center;gap:8px}
+.bk:hover .tip,.bk:focus-visible .tip,.bk.zeigen .tip{display:block}
+/* Zum Vergleich */
+.kombi{margin-top:28px;border-top:2px solid var(--navy-500);padding-top:4px}
+.k-wahl{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:15.2px;color:var(--text-2)}
+.k-select{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 10px;border:2px solid var(--navy-500);border-radius:8px;background:var(--navy-800);font-weight:600;color:#fff;max-width:100%}
+.k-select::after{content:"▾";font-size:12px}
+.so{margin-top:20px}
+.vs{font-size:14px;line-height:20px;color:var(--staat);display:flex;align-items:center;gap:6px}
+.vs::before{content:"";width:8px;height:8px;border-radius:999px;background:var(--staat);flex:none}
+
+/* ---------- A: Rangliste mit Balken ---------- */
+.a-liste > li + li{border-top:1px solid var(--navy-700)}
+.a-z{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name zahl" "vs vs" "wahl wahl" "bk bk" "einz akt" "det det";column-gap:16px;padding:14px 0 6px}
+.a-z .name{grid-area:name;align-self:baseline}
+.a-z .zahl{grid-area:zahl;align-self:baseline}
+.a-z .vs{grid-area:vs;justify-self:end}
+.a-z .k-wahl{grid-area:wahl;margin-top:6px}
+.a-z .bk{grid-area:bk;margin-top:6px}
+.a-z .einz{grid-area:einz;justify-self:start}
+.a-z .aktion{grid-area:akt;justify-self:end}
+.a-z .det{grid-area:det}
+
+/* ---------- B: Fläche für ein Produkt ---------- */
+.b-chart{margin-top:14px}
+.b-chart svg{display:block;overflow:visible}
+.b-fuss{font-size:14px;color:var(--text-3);margin-top:2px}
+.b-liste{margin-top:18px;border-top:1px solid var(--navy-700)}
+.b-liste > li{border-bottom:1px solid var(--navy-700)}
+.b-wahl{display:grid;grid-template-columns:14px minmax(0,1fr) auto;align-items:center;column-gap:12px;width:100%;min-height:52px;padding:8px 0;color:var(--text-2)}
+.b-wahl .punkt{width:12px;height:12px;border-radius:999px;border:2px solid var(--navy-500)}
+.b-wahl .name{font-size:17px;font-weight:600;line-height:22px}
+.b-wahl .bz{font-size:18px;font-weight:600;white-space:nowrap;text-align:right}
+.b-wahl[aria-pressed="true"]{color:#fff}
+.b-wahl[aria-pressed="true"] .punkt{background:var(--gold);border-color:var(--gold)}
+.b-wahl[aria-pressed="true"] .bz{font-weight:700}
+.b-wahl:hover{color:#fff}
+.b-akt{display:flex;justify-content:space-between;align-items:center;padding:0 0 8px 26px;margin-top:-6px}
+.b-li .det{padding-left:26px}
+.b-kombi{margin-top:28px;border-top:2px solid var(--navy-500);padding-top:12px}
+.b-kombi .b-liste{margin-top:6px;border-top:0}
+.b-kombi .b-liste > li{border-bottom:0}
+
+/* ---------- C: Säulen auf einer Grundlinie ---------- */
+.c-reihe{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:18px}
+.c-slot{display:grid;grid-template-rows:auto 150px auto auto;align-content:start;justify-items:center;text-align:center;min-width:0}
+.c-zahl{white-space:nowrap;line-height:1.25}
+.c-zahl .r{display:block;font-size:14px;color:var(--text-2)}
+.c-zahl .n{font-size:17px;font-weight:700}
+.c-plot{width:100%;display:flex;align-items:flex-end;justify-content:center;border-bottom:1px solid var(--navy-500);margin-top:8px}
+.c-slot:first-child .c-plot{border-bottom-left-radius:0}
+.c-s{width:40px;display:flex;flex-direction:column-reverse;border-radius:4px 4px 0 0;overflow:hidden}
+.c-s > div{flex:none}
+.c-s > .s-staat{min-height:15px}
+.c-s > .s-wachs{flex:1 1 0;min-height:0}
+.c-s > div + div{box-shadow:inset 0 -2px 0 var(--navy-900)}
+.c-name{display:block;padding:0 4px;margin-top:8px;font-size:15.2px;font-weight:600;line-height:20px;color:var(--text-2);overflow-wrap:anywhere;hyphens:manual;justify-content:center;flex-wrap:wrap;min-height:44px;align-items:flex-start}
+.c-name > span{text-decoration:none}
+.c-name[aria-expanded="true"]{color:#fff}
+.c-name[aria-expanded="true"] > span{text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:4px}
+.c-name::after{content:none}
+.c-name .pf{font-size:14px;font-weight:400;text-decoration:none;display:inline-block}
+.c-slot .det,.c-slot .c-zahl-k{display:none}
+.c-slot .vs{display:block;text-align:center;margin-top:2px}
+.c-slot .vs::before{display:none}
+.c-slot .vs span{display:block}
+.c-panel{margin-top:10px;padding:14px 0 4px;border-top:1px solid var(--navy-700)}
+.c-panel[hidden]{display:none}
+.c-p-kopf{display:flex;justify-content:space-between;align-items:baseline;gap:8px 16px;flex-wrap:wrap;margin-bottom:6px}
+.c-kombi{margin-top:28px;border-top:2px solid var(--navy-500);padding-top:12px}
+.c-kombi .c-reihe{margin-top:12px;grid-template-columns:minmax(0,1fr) minmax(0,4fr);align-items:center}
+.c-kombi .k-wahl{align-self:center;padding-left:24px}
+@container (max-width:560px){
+  .c-reihe{grid-template-columns:minmax(0,1fr)}
+  .c-reihe > .c-slot + .c-slot{border-top:1px solid var(--navy-700)}
+  .c-slot{grid-template-columns:22px minmax(0,1fr) auto;grid-template-rows:auto auto auto;grid-template-areas:"plot name zahl" "plot vs vs" "det det det";justify-items:stretch;text-align:left;column-gap:14px;padding:10px 0;align-items:center}
+  .c-slot .c-zahl{grid-area:zahl;line-height:26px}
+  .c-slot .c-zahl .r{display:inline;font-size:20px;font-weight:700;color:#fff}
+  .c-slot .c-zahl .n{font-size:20px}
+  .c-slot .c-plot{grid-area:plot;height:52px;margin-top:0;border-bottom:1px solid var(--navy-500)}
+  .c-slot .c-s{width:22px}
+  .c-slot .c-name{grid-area:name;margin-top:0;min-height:44px;justify-content:flex-start;align-items:center;font-size:17px;line-height:22px}
+  .c-slot .det{grid-area:det}
+  .c-slot .vs{grid-area:vs;text-align:left;margin:0 0 2px}
+  .c-slot .vs::before{display:inline-block;margin-right:6px;vertical-align:middle;position:relative;top:-1px}
+  .c-slot .vs span{display:inline}
+  .c-slot .c-plot{grid-row:1 / span 2;align-self:center;height:64px}
+  .c-s > .s-staat{min-height:14px}
+  .c-slot .det.auf{display:grid}
+  .c-panel{display:none!important}
+  .c-kombi .c-reihe{grid-template-columns:minmax(0,1fr)}
+  .c-kombi .k-wahl{padding-left:0;order:-1}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="kopf"><div class="rahmen">
+  <h1>Netto-Vergleich: drei Vorschläge für die Grafik</h1>
+  <p>Beispiel: 40 Jahre, 500&nbsp;€ im Monat, 50.000&nbsp;€ Einkommen, verheiratet. Zahlen aus dem Rechner, Stand 24.11.2026.</p>
+  <p class="bitte">Bitte einen Favoriten wählen: A, B oder C.</p>
+  <nav class="sprung" aria-label="Sprungmarken"><a href="#vorschlag-a">A: Balken</a><a href="#vorschlag-b">B: Verlauf</a><a href="#vorschlag-c">C: Säulen</a></nav>
+</div></header>
+
+<section id="vorschlag-a" aria-labelledby="t-a">
+  <div class="v-titel rahmen"><h2 id="t-a">Vorschlag A <span>· Balken</span></h2></div>
+  <div class="seite"><div class="rahmen">
+    <div class="modus" aria-hidden="true"><span class="pill">Ein Produkt</span><span class="pill an">Alle Produkte</span></div>
+    <div class="rechner"><div class="form-platz"></div><div class="ergebnis" id="erg-a"></div></div>
+  </div></div>
+  <p class="v-notiz rahmen">Liest sich wie eine Rangliste: Name links, Zahl rechts in einer Flucht, Balken darunter ab 0 · schwächer: nahe Beträge ergeben fast gleich lange Balken · Aufwand klein.</p>
+</section>
+
+<section id="vorschlag-b" aria-labelledby="t-b">
+  <div class="v-titel rahmen"><h2 id="t-b">Vorschlag B <span>· Verlauf</span></h2></div>
+  <div class="seite"><div class="rahmen">
+    <div class="modus" aria-hidden="true"><span class="pill">Ein Produkt</span><span class="pill an">Alle Produkte</span></div>
+    <div class="rechner"><div class="form-platz"></div><div class="ergebnis" id="erg-b"></div></div>
+  </div></div>
+  <p class="v-notiz rahmen">Eine Aussage: so viel zahlen Sie ein, so viel wird daraus, für das gewählte Produkt · schwächer: zeigt nur ein Produkt auf einmal · Aufwand groß (Rechner muss Jahreswerte liefern).</p>
+</section>
+
+<section id="vorschlag-c" aria-labelledby="t-c">
+  <div class="v-titel rahmen"><h2 id="t-c">Vorschlag C <span>· Säulen</span></h2></div>
+  <div class="seite"><div class="rahmen">
+    <div class="modus" aria-hidden="true"><span class="pill">Ein Produkt</span><span class="pill an">Alle Produkte</span></div>
+    <div class="rechner"><div class="form-platz"></div><div class="ergebnis" id="erg-c"></div></div>
+  </div></div>
+  <p class="v-notiz rahmen">Fünf Säulen auf einer Grundlinie, Zahlen in einer Linie darüber · schwächer: Knopf erst nach Antippen des Namens, am Handy wird daraus eine Liste · Aufwand mittel.</p>
+</section>
+
+<section class="urteil" aria-labelledby="t-u"><div class="rahmen">
+  <h2 id="t-u">Einschätzung</h2>
+  <p>Am klarsten bleibt A: Name und Zahl in einer Zeile, darunter ein ruhiger Balken ab 0, das liest jeder wie eine Rangliste, auch am Handy. B ist jetzt die ruhigste Ergänzung für den zweiten Blick auf ein Produkt (so viel zahlen Sie ein, so viel wird daraus), C die schönste Übersicht am Computer.</p>
+</div></section>
+
+<template id="form-vorlage">
+  <div class="form" inert aria-hidden="true">
+    <p class="klein">Gerechnet mit der Variante Standard: 0,74&nbsp;% Kosten im Jahr, bei der ETF-Rentenversicherung 0,67&nbsp;% und 36&nbsp;€ Kontoführung. <span class="link">Kosten im Einzelnen</span></p>
+    <div class="felder">
+      <div><label>Alter</label><div class="feld"><b>40</b><i>Jahre</i></div></div>
+      <div><label>Rente mit</label><div class="feld"><b>67</b><i>Jahre</i></div></div>
+      <div><label>Im Monat</label><div class="feld"><b>500</b><i class="eur">€</i></div></div>
+      <div><label>Einmal zu Beginn</label><div class="feld"><b>0</b><i class="eur">€</i></div></div>
+    </div>
+    <p class="unter">Sie zahlen nur einmal ein? Dann tragen Sie im Monat 0 ein.</p>
+    <div class="gruppe"><label style="margin-bottom:0">Einkommen, das Sie versteuern</label><p class="hinweis" style="margin-bottom:4px">Steht im Steuerbescheid als „zu versteuerndes Einkommen“. Ungefähr reicht.</p><div class="feld b256"><b>50.000</b><i class="eur">€</i></div></div>
+    <div class="gruppe"><span class="lg">Steuererklärung</span><div class="pillen"><span class="pill">allein</span><span class="pill an">verheiratet</span></div></div>
+    <div class="gruppe"><span class="lg">Steuererstattung anlegen?</span><div class="pillen"><span class="pill an">Ja</span><span class="pill">Nein</span></div><p class="hinweis" style="margin-top:4px">Gilt für Altersvorsorgedepot und Rürup-Rente.</p></div>
+    <div class="gruppe"><span class="lg">Kinder</span><div class="stepper"><span class="rund44">−</span><output>0</output><span class="rund44">+</span></div></div>
+    <div class="gruppe"><span class="mehr-einst">Mehr einstellen&nbsp;▾</span></div>
+  </div>
+</template>
+
+<script>
+(function(){
+"use strict";
+var NB = " ";
+function fmt(v){ return String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+function euro(v){ return fmt(v) + NB + "€"; }
+function rund(v){ return "rund" + NB + euro(v); }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;"); }
+function weich(n){ return n.replace("Rentenversicherung","Renten­versicherung").replace("Lebensversicherung","Lebens­versicherung").replace("Altersvorsorgedepot","Alters­vorsorge­depot"); }
+
+/* Zahlen aus dem Live-Netto-Vergleich, 24.11.2026 (Variante Standard, Steuererstattung anlegen: Ja) */
+var P = [
+  { id:"ruerup", name:"Rürup-Rente", total:369000, eigen:162000, staat:42000, staatText:"angelegte Steuererstattung", p3:233000, rendite:"5,4", k1:157, k67:39000, knopf:"Abschließen", fett:"Vom Finanzamt zurück: rund 1.600 € im Jahr" },
+  { id:"avd", name:"Altersvorsorgedepot", total:343000, eigen:162000, staat:16800, staatText:"Zulagen 15.000 €, angelegte Steuererstattung 1.800 €", p3:215000, rendite:"5,0", k1:44, k67:30000, knopf:"Depot eröffnen" },
+  { id:"rv", name:"ETF-Rentenversicherung", total:342000, eigen:162000, staat:0, p3:219000, rendite:"5,0", k1:56, k67:26000, knopf:"Abschließen" },
+  { id:"lv", name:"ETF-Lebensversicherung", total:336000, eigen:162000, staat:0, p3:215000, rendite:"4,8", k1:112, k67:29000, knopf:"Abschließen", extra:"Gerechnet mit der Leistung im Todesfall, die das Steuerrecht für den Steuervorteil nach 12 Jahren und ab 62 mindestens verlangt." },
+  { id:"depot", name:"ETF-Depot", total:319000, eigen:162000, staat:0, p3:217000, rendite:"4,5", k1:44, k67:26000, knopf:"Depot eröffnen" }
+];
+var K = { id:"kombi", name:"Zum Vergleich: auf zwei Verträge aufgeteilt", total:350000, eigen:162000, staat:17100, staatText:"Zulagen 15.000 €, angelegte Steuererstattung 2.100 €", p3:223000, rendite:"5,1", k1:63, k67:29000,
+  extra:"Davon nach Steuern: im Altersvorsorgedepot rund 111.000 €, in der ETF-Rentenversicherung rund 239.000 €." };
+P.concat([K]).forEach(function(p){ p.wachs = p.total - p.eigen - p.staat; });
+var S = P.slice().sort(function(a,b){ return b.total - a.total; });
+var ALLE = P.concat([K]);
+function finde(id){ return ALLE.filter(function(q){ return q.id === id; })[0]; }
+var MAX = 369000;   /* längster Balken = volle Breite; alle beginnen bei 0 */
+
+document.querySelectorAll(".form-platz").forEach(function(p){ p.replaceWith(document.getElementById("form-vorlage").content.cloneNode(true)); });
+
+var KOPF = '<p class="e-kopf">Mit 67, nach Steuern, bei 6 % Wertzuwachs vor Kosten.</p>';
+var LEG = '<ul class="leg" aria-label="Legende"><li><span class="sw sw-eigen"></span>Eingezahlt</li><li><span class="sw sw-staat"></span>Vom Staat</li><li><span class="sw sw-wachs"></span>Wertzuwachs</li></ul>';
+function teile(p){ return [["eigen",p.eigen,"Eingezahlt"],["staat",p.staat,"Vom Staat"],["wachs",p.wachs,"Wertzuwachs"]].filter(function(t){ return t[1] > 0; }); }
+function aria(p){ return (p.id === "kombi" ? "Zwei Verträge zusammen" : p.name) + ": " + rund(p.total) + ", davon eingezahlt " + rund(p.eigen) + (p.staat ? ", vom Staat " + rund(p.staat) : "") + ", Wertzuwachs " + rund(p.wachs) + "."; }
+var detNr = 0;
+/* Inhalt der Einzelheiten: 3 % als kleine erste Zeile, dann die Teile, dann wie heute; der volle Knopf steht hier */
+function det(p, mitKnopf){
+  return '<div class="det" id="det-' + (++detNr) + '" hidden>' +
+    '<p class="d3">Bei 3 % im Jahr: ' + rund(p.p3) + '</p>' +
+    '<ul class="teile">' +
+      '<li><span class="sw sw-eigen"></span><span>Selbst eingezahlt <b>' + rund(p.eigen) + '</b></span></li>' +
+      (p.staat ? '<li><span class="sw sw-staat"></span><span>Vom Staat <b>' + rund(p.staat) + '</b> (' + p.staatText + ')</span></li>' : '') +
+      '<li><span class="sw sw-wachs"></span><span>Wertzuwachs nach Kosten und Steuern <b>' + rund(p.wachs) + '</b></span></li>' +
+    '</ul>' +
+    (p.extra ? '<p>' + p.extra + '</p>' : '') +
+    '<p>Rendite nach Steuern ' + p.rendite + ' % im Jahr</p>' +
+    (p.fett ? '<p class="weiss">' + p.fett + '</p>' : '') +
+    '<p>Kosten im ersten Jahr rund ' + fmt(p.k1) + ' €, bis 67 zusammen ' + rund(p.k67) + ', oben schon abgezogen.</p>' +
+    '<p class="wie">Darunter wie heute: Auszahlen, Steuern, Was zu wissen ist.</p>' +
+    (mitKnopf && p.knopf ? '<a class="knopf" href="#" onclick="return false">' + p.knopf + '</a>' : '') +
+  '</div>';
+}
+function einz(){ return '<button type="button" class="einz" aria-expanded="false"><span>Einzelheiten</span></button>'; }
+function aktion(p){ return p.knopf ? '<a class="aktion" href="#" onclick="return false">' + p.knopf + '</a>' : ''; }
+function balken(p){
+  var segs = teile(p).map(function(t){ return '<div class="s-' + t[0] + '"' + (t[0] === "wachs" ? '' : ' style="width:' + (t[1] / p.total * 100) + '%"') + '></div>'; }).join("");
+  var tip = '<ul class="tip" aria-hidden="true">' + teile(p).map(function(t){ return '<li><span class="sw sw-' + t[0] + '"></span>' + t[2] + ' <b>' + rund(t[1]) + '</b></li>'; }).join("") + '</ul>';
+  return '<div class="bk" tabindex="0" role="img" aria-label="' + esc(aria(p)) + '" data-total="' + p.total + '"><div class="bk-b" style="width:' + (p.total / MAX * 100) + '%">' + segs + '</div>' + tip + '</div>';
+}
+var KWAHL = '<p class="k-wahl">150 € ins Altersvorsorgedepot, 350 € <span class="k-select" aria-hidden="true">in die ETF-Rentenversicherung</span></p>';
+var SO = '<div class="so">' + einz().replace("Einzelheiten", "So rechnen wir") +
+  '<div class="det" hidden><p>Verglichen wird, was mit 67 nach Steuern da ist. Wertzuwachs 6 % im Jahr, vor Kosten. Davon gehen die Kosten jedes Produkts ab.</p>' +
+  '<p>Börsenkurse schwanken, Verluste sind möglich, nichts davon ist garantiert. Die Zahl ist eine Rechnung, kein Versprechen.</p><p class="wie">Die übrigen Punkte wie heute.</p></div></div>';
+
+/* Schalter: „Einzelheiten“ öffnet das Feld direkt dahinter im selben Block */
+document.addEventListener("click", function(e){
+  var bk = e.target.closest(".bk");
+  document.querySelectorAll(".bk.zeigen").forEach(function(b){ if (b !== bk) b.classList.remove("zeigen"); });
+  if (bk) bk.classList.toggle("zeigen");
+  var b = e.target.closest(".einz:not(.c-name)");
+  if (!b) return;
+  var block = b.closest("li, .so, .c-slot");
+  var d = block && block.querySelector(".det");
+  if (!d) return;
+  var auf = b.getAttribute("aria-expanded") !== "true";
+  b.setAttribute("aria-expanded", auf ? "true" : "false");
+  d.hidden = !auf;
+});
+
+/* ================= A ================= */
+function zeileA(p){
+  return '<li class="a-z">' +
+    '<p class="name">' + (p.id === "kombi" ? p.name : weich(p.name)) + '</p>' +
+    '<p class="zahl">' + rund(p.total) + '</p>' +
+    (p.staat ? '<p class="vs">davon vom Staat ' + rund(p.staat) + '</p>' : '') +
+    (p.id === "kombi" ? KWAHL : '') +
+    balken(p) + einz() + aktion(p) + det(p, true) +
+  '</li>';
+}
+document.getElementById("erg-a").innerHTML = KOPF + LEG +
+  '<ol class="a-liste">' + S.map(zeileA).join("") + '</ol>' +
+  '<div class="kombi"><ol class="a-liste">' + zeileA(K) + '</ol></div>' + SO;
+
+/* ================= B ================= */
+/* Verlauf schematisch: Sparplan 6.000 € im Jahr mit Zinseszins; Zins je Produkt so, dass die Linie
+   mit 67 genau auf dem echten Endwert landet. Zwischenwerte werden nicht angezeigt. */
+var JAHRE = 27, BEITRAG = 6000;
+function endwert(r){ return BEITRAG * (Math.pow(1 + r, JAHRE) - 1) / r; }
+function zins(z){ var lo = 1e-6, hi = 0.2; for (var k = 0; k < 80; k++){ var m = (lo + hi) / 2; if (endwert(m) < z) lo = m; else hi = m; } return (lo + hi) / 2; }
+function kurve(z){ var r = zins(z), a = []; for (var t = 0; t <= JAHRE; t++) a.push(BEITRAG * (Math.pow(1 + r, t) - 1) / r); a[JAHRE] = z; return a; }
+ALLE.forEach(function(p){ p.kurve = kurve(p.total); });
+var EIGEN = []; for (var t = 0; t <= JAHRE; t++) EIGEN.push(BEITRAG * t);
+var bWahl = S[0].id;
+var NS = "http://www.w3.org/2000/svg";
+function el(n, a, txt){ var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; }
+
+function zeileB(p){
+  var an = p.id === bWahl;
+  return '<li class="b-li" data-id="' + p.id + '">' +
+    '<button type="button" class="b-wahl" aria-pressed="' + an + '"><span class="punkt"></span><span class="name">' + (p.id === "kombi" ? "Zwei Verträge zusammen" : weich(p.name)) + '</span><span class="bz">' + rund(p.total) + '</span></button>' +
+    (an ? '<div class="b-akt">' + einz() + aktion(p) + '</div>' + det(p, true) : '') +
+  '</li>';
+}
+function baueB(){
+  document.getElementById("erg-b").innerHTML = KOPF +
+    '<div class="b-chart" id="b-chart"></div><p class="b-fuss">Verlauf schematisch.</p>' +
+    '<ol class="b-liste">' + S.map(zeileB).join("") + '</ol>' +
+    '<div class="b-kombi"><p class="name">Zum Vergleich: auf zwei Verträge aufgeteilt</p>' + KWAHL + '<ol class="b-liste">' + zeileB(K) + '</ol></div>' + SO;
+  document.querySelectorAll("#erg-b .b-wahl").forEach(function(b){ b.addEventListener("click", function(){ bWahl = b.closest("li").dataset.id; baueB(); var neu = document.querySelector('#erg-b li[data-id="' + bWahl + '"] .b-wahl'); if (neu) neu.focus({ preventScroll: true }); }); });
+  zeichneB();
+}
+function zeichneB(){
+  var box = document.getElementById("b-chart"); if (!box) return;
+  var p = finde(bWahl);
+  var W = Math.floor(box.clientWidth), schmal = W < 520;
+  var gross = schmal ? 18 : 24, luft = schmal ? 10 : 14, MINB = schmal ? 15 : 18;
+  /* Breite der Beschriftung messen, damit nichts über den Rand ragt */
+  var mess = el("svg", { width: 10, height: 10, style: "position:absolute;visibility:hidden" }); box.innerHTML = ""; box.appendChild(mess);
+  function breite(txt, fs, fw){ var t = el("text", { "font-size": fs, "font-weight": fw || 400 }, txt); mess.appendChild(t); var w = t.getComputedTextLength(); t.remove(); return w; }
+  var staatTxt = schmal ? ["Vom Staat", rund(p.staat || 0)] : ["Vom Staat " + rund(p.staat || 0)];
+  var labW = Math.ceil(Math.max(breite(rund(p.total), gross, 700), breite("Eingezahlt", 14), breite(rund(p.eigen), 15, 600), breite("Wertzuwachs", 14),
+    p.staat ? 14 + Math.max.apply(null, staatTxt.map(function(t){ return breite(t, 14, 600); })) : 0)) + 2;
+  var pw = W - labW - luft, H = schmal ? 230 : 210, oben = 16, YMAX = 400000;
+  function x(i){ return i / JAHRE * pw; }
+  function y(v){ return oben + H - v / YMAX * H; }
+  function pts(a){ return a.map(function(v,i){ return x(i).toFixed(1) + " " + y(v).toFixed(1); }); }
+  /* Geld vom Staat wächst mit; am Ende mindestens MINB px hoch, zulasten des Wertzuwachses (Gesamtwert bleibt maßstäblich) */
+  var echtPx = (p.staat || 0) / YMAX * H, f = p.staat ? Math.max(1, MINB / echtPx) : 0;
+  var OBEN_ST = EIGEN.map(function(e, i){ return Math.min(e + (p.staat || 0) * (p.kurve[i] / p.total) * f, p.kurve[i]); });
+  var svg = el("svg", { width: W, height: oben + H + 30, role: "img",
+    "aria-label": p.name + ", Verlauf bis 67, schematisch: eingezahlt " + rund(p.eigen) + (p.staat ? ", vom Staat " + rund(p.staat) : "") + ", zusammen " + rund(p.total) + "." });
+  var defs = el("defs", {}), pat = el("pattern", { id: "b-schraffur", patternUnits: "userSpaceOnUse", width: 6, height: 6, patternTransform: "rotate(45)" });
+  pat.appendChild(el("rect", { width: 6, height: 6, fill: "#3FC4CC" })); pat.appendChild(el("rect", { width: 2, height: 6, fill: "#2A98A0" }));
+  defs.appendChild(pat); svg.appendChild(defs);
+  var oE = pts(EIGEN), oS = pts(OBEN_ST), oP = pts(p.kurve);
+  var fWachs = el("path", { d: "M" + oP.join(" L") + " L" + oS.slice().reverse().join(" L") + " Z", fill: "#EDCF7F" });
+  fWachs.appendChild(el("title", {}, "Wertzuwachs: " + rund(p.wachs)));
+  svg.appendChild(fWachs);
+  if (p.staat) {
+    var fStaat = el("path", { d: "M" + oS.join(" L") + " L" + oE.slice().reverse().join(" L") + " Z", fill: "url(#b-schraffur)" });
+    fStaat.appendChild(el("title", {}, "Vom Staat: " + rund(p.staat)));
+    svg.appendChild(fStaat);
+    svg.appendChild(el("path", { d: "M" + oS.join(" L"), fill: "none", stroke: "#16243A", "stroke-width": 2 }));
+  }
+  var fEigen = el("path", { d: "M" + oE.join(" L") + " L" + x(JAHRE) + " " + y(0) + " L0 " + y(0) + " Z", fill: "#4672BA" });
+  fEigen.appendChild(el("title", {}, "Eingezahlt: " + rund(p.eigen)));
+  svg.appendChild(fEigen);
+  svg.appendChild(el("path", { d: "M" + oE.join(" L"), fill: "none", stroke: "#16243A", "stroke-width": 2 }));
+  svg.appendChild(el("line", { x1: 0, x2: x(JAHRE), y1: y(0) + .5, y2: y(0) + .5, stroke: "#4A6690" }));
+  svg.appendChild(el("text", { x: 0, y: y(0) + 22, fill: "#93A7C6", "font-size": 14 }, "heute"));
+  svg.appendChild(el("text", { x: x(JAHRE), y: y(0) + 22, fill: "#93A7C6", "font-size": 14, "text-anchor": "end" }, "mit 67"));
+  box.innerHTML = ""; box.appendChild(svg);
+
+  /* „Wertzuwachs“ in die goldene Fläche, wenn es mit Luft hineinpasst */
+  var x0 = x(JAHRE) + luft, yT = y(p.total), yS = y(OBEN_ST[JAHRE]), yE = y(EIGEN[JAHRE]);
+  var tw = el("text", { "font-size": 14, "font-weight": 600, "text-anchor": "end", fill: "#16243A" }, "Wertzuwachs");
+  svg.appendChild(tw);
+  var w = tw.getComputedTextLength(), xr = x(JAHRE) - 10, xl = xr - w;
+  function wert(a, xx){ var t = xx / pw * JAHRE, i = Math.floor(t), fr = t - i, j = Math.min(i + 1, JAHRE); return a[i] + (a[j] - a[i]) * fr; }
+  var obenG = y(wert(p.kurve, xl)), untenG = y(wert(OBEN_ST, xr));
+  var wachsInnen = untenG - obenG >= 22;
+  if (wachsInnen) { tw.setAttribute("x", xr); tw.setAttribute("y", (obenG + untenG) / 2 + 5); } else tw.remove();
+
+  /* Beschriftung rechts: von oben nach unten, nie überlappend */
+  var hT = schmal ? 22 : 28, hS = schmal ? 38 : 20;
+  var reihe = [{ k: "T", ziel: yT, h: hT }];
+  if (!wachsInnen) reihe.push({ k: "W", ziel: (yT + yS) / 2, h: 18 });
+  if (p.staat) reihe.push({ k: "S", ziel: (yS + yE) / 2, h: hS });
+  reihe.push({ k: "E", ziel: yE + 6 + 18, h: 38 });
+  var unten = -1e9;
+  reihe.forEach(function(r){ var top = Math.max(r.ziel - r.h / 2, unten + 6); r.top = top; r.mitte = top + r.h / 2; unten = top + r.h; });
+  reihe.forEach(function(r){
+    if (r.k === "T") svg.appendChild(el("text", { x: x0, y: r.top + r.h - (schmal ? 6 : 7), fill: "#FFFFFF", "font-size": gross, "font-weight": 700 }, rund(p.total)));
+    if (r.k === "W") svg.appendChild(el("text", { x: x0, y: r.top + 14, fill: "#C3CEDE", "font-size": 14 }, "Wertzuwachs"));
+    if (r.k === "S") {
+      var ziel = r.ziel, dotY = schmal ? r.top + 9 : r.mitte;
+      if (Math.abs(dotY - ziel) > 3) svg.appendChild(el("path", { d: "M" + (x(JAHRE) + 2) + " " + ziel + " L" + (x0 - 2) + " " + dotY, stroke: "#3FC4CC", "stroke-width": 1, fill: "none" }));
+      svg.appendChild(el("circle", { cx: x0 + 4, cy: dotY, r: 4, fill: "#3FC4CC" }));
+      staatTxt.forEach(function(t, i){ svg.appendChild(el("text", { x: x0 + 14, y: (schmal ? r.top + 14 : r.mitte + 5) + i * 19, fill: "#3FC4CC", "font-size": 14, "font-weight": 600 }, t)); });
+    }
+    if (r.k === "E") {
+      svg.appendChild(el("text", { x: x0, y: r.top + 14, fill: "#C3CEDE", "font-size": 14 }, "Eingezahlt"));
+      svg.appendChild(el("text", { x: x0, y: r.top + 33, fill: "#FFFFFF", "font-size": 15, "font-weight": 600 }, rund(p.eigen)));
+    }
+  });
+}
+baueB();
+
+/* ================= C ================= */
+function slot(p){
+  return '<div class="c-slot" data-id="' + p.id + '">' +
+    '<p class="c-zahl"><span class="r">rund</span> <span class="n">' + euro(p.total) + '</span></p>' +
+    '<div class="c-plot" role="img" aria-label="' + esc(aria(p)) + '"><div class="c-s" style="height:' + (p.total / MAX * 100) + '%">' +
+      teile(p).map(function(t){ return '<div class="s-' + t[0] + '"' + (t[0] === "wachs" ? '' : ' style="height:' + (t[1] / p.total * 100) + '%"') + '></div>'; }).join("") + '</div></div>' +
+    '<button type="button" class="einz c-name" aria-expanded="false"><span>' + (p.id === "kombi" ? "Zwei Verträge zusammen" : weich(p.name)) + '</span>\u00A0<span class="pf" aria-hidden="true">▾</span></button>' +
+    (p.staat ? '<p class="vs">davon vom Staat <span>' + rund(p.staat) + '</span></p>' : '') +
+    det(p, true) +
+  '</div>';
+}
+document.getElementById("erg-c").innerHTML = KOPF + LEG +
+  '<div class="c-reihe">' + S.map(slot).join("") + '</div><div class="c-panel" hidden></div>' +
+  '<div class="c-kombi"><p class="name">Zum Vergleich: auf zwei Verträge aufgeteilt</p><div class="c-reihe">' + slot(K) + KWAHL + '</div><div class="c-panel" hidden></div></div>' + SO;
+document.querySelectorAll("#erg-c .c-name").forEach(function(b){
+  b.addEventListener("click", function(){
+    var s = b.closest(".c-slot"), reihe = s.parentElement, panel = reihe.nextElementSibling, p = finde(s.dataset.id);
+    var schmal = document.getElementById("erg-c").clientWidth <= 560;
+    var auf = b.getAttribute("aria-expanded") !== "true";
+    reihe.querySelectorAll(".c-name").forEach(function(o){ o.setAttribute("aria-expanded", "false"); });
+    reihe.querySelectorAll(".det").forEach(function(d){ d.classList.remove("auf"); });
+    panel.hidden = true;
+    if (!auf) return;
+    b.setAttribute("aria-expanded", "true");
+    if (schmal) { var d = s.querySelector(".det"); d.hidden = false; d.classList.add("auf"); }
+    else {
+      panel.innerHTML = '<div class="c-p-kopf"><p class="name">' + (p.id === "kombi" ? "Zwei Verträge zusammen" : p.name) + '</p><p class="zahl">' + rund(p.total) + '</p></div>' + det(p, true).replace(" hidden>", ">");
+      panel.hidden = false;
+    }
+  });
+});
+
+var warte; window.addEventListener("resize", function(){ clearTimeout(warte); warte = setTimeout(zeichneB, 80); });
+})();
+</script>
+</body>
+</html>
